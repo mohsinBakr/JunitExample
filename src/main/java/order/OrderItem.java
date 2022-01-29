@@ -5,6 +5,10 @@ public class OrderItem {
     private double price;
     private String name;
 
+    public OrderItem(String itemName,double itemPrice){
+        this.price = itemPrice;
+        this.name = itemName;
+    }
     public int getId() {
         return id;
     }
