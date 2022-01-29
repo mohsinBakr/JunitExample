@@ -5,7 +5,7 @@ name: CI-Additem
 
 on:
   push:
-    branches: [ add-item ]
+    branches: [ practice-answer ]
   pull_request:
     branches: [ master ]
 
