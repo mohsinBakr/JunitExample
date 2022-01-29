@@ -1,12 +1,16 @@
 import order.Order;
 import order.OrderItem;
+import order.OrderStatus;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.ArrayList;
+
 import static org.junit.Assert.*;
 
 public class TestOrder {
     Order order ;
-
+    double userBalance = 3.0;
     @Before
     public void setup(){
         order = new Order();
@@ -20,10 +24,7 @@ public class TestOrder {
     @Test
     public void testOrderAddItemIncreasesOrderItemsCountByOne(){
         assertEquals(0,order.itemsCount());
-        OrderItem item = new OrderItem();
-        item.setId(1);
-        item.setName("Pepsi");
-        item.setPrice(5.0);
+        OrderItem item = new OrderItem("Pepsi",5.0);
         int itemsCount = order.addItem(item).size();
         assertEquals(1,itemsCount);
     }
@@ -31,11 +32,26 @@ public class TestOrder {
     @Test
     public void testOrderAddItemIncreasesOrderTotalPriceByItemPrice(){
         assertEquals(0,order.itemsCount());
-        OrderItem item = new OrderItem();
-        item.setId(1);
-        item.setName("Pepsi");
-        item.setPrice(5.0);
+        OrderItem item = new OrderItem("Bread",2.5);
         order.addItem(item);
-        assertEquals(5,order.getTotalPrice(),1e-15);
+        assertEquals(2.5,order.getTotalPrice(),1e-15);
+    }
+
+    @Test
+    public void testOrderRemoveItemFromOrder(){
+        order.addItem(new OrderItem("Chips",10));
+        order.addItem(new OrderItem("Water",3));
+        order.addItem(new OrderItem("Nescafe",100));
+        String toBeRemovedItemName = "Water";
+        ArrayList<OrderItem> items = order.removeItem(toBeRemovedItemName);
+        assertFalse("Item "+toBeRemovedItemName+ " found in order", items.stream().anyMatch(e -> e.getName().equals(toBeRemovedItemName)));
+        assertEquals(2,items.size());
+    }
+    @Test
+    public void testOrderProceedToCheckoutFailsWithInsufficientBalanceDoesntChangeOrderStatus() throws Exception {
+        order = new Order();
+        order.addItem(new OrderItem("Juice",12.0));
+        order.proceedToCheckout(userBalance);
+        assertEquals(OrderStatus.OPEN,order.getStatus());
     }
 }
