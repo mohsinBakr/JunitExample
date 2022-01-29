@@ -6,16 +6,17 @@ import static org.junit.Assert.*;
 
 public class TestOrder {
     Order order ;
+
+    @Before
+    public void setup(){
+        order = new Order();
+    }
     @Test
     public void testOrderWhenCreatedHasNoItems(){
         Order order = new Order();
         assertEquals(0,order.itemsCount());
     }
 
-    @Before
-    public void setup(){
-        order = new Order();
-    }
     @Test
     public void testOrderAddItemIncreasesOrderItemsCountByOne(){
         assertEquals(0,order.itemsCount());

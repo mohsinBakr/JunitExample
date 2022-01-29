@@ -2,6 +2,11 @@ package order;
 
 import java.util.ArrayList;
 
+enum OrderStatus {
+    OPEN,
+    PENDING_CHECKOUT,
+    PLACED
+}
 public class Order {
     private ArrayList<OrderItem> items = new ArrayList<OrderItem>();
     private double totalPrice = 0;
