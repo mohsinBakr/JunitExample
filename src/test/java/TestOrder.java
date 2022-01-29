@@ -2,6 +2,7 @@ import order.Order;
 import order.OrderItem;
 import order.OrderStatus;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -21,20 +22,20 @@ public class TestOrder {
         assertEquals(0,order.itemsCount());
     }
 
-    @Test
+    @Ignore
     public void testOrderAddItemIncreasesOrderItemsCountByOne(){
     }
 
-    @Test
+    @Ignore
     public void testOrderAddItemIncreasesOrderTotalPriceByItemPrice(){
 
     }
 
-    @Test
+    @Ignore
     public void testOrderRemoveItemFromOrder(){
 
     }
-    @Test
+    @Ignore
     public void testOrderProceedToCheckoutFailsWithInsufficientBalanceDoesntChangeOrderStatus() throws Exception {
 
     }
