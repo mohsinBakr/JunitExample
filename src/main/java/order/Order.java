@@ -1,8 +1,10 @@
 package order;
 
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 public class Order {
+    public static final Logger LOGGER = Logger.getLogger(Order.class.getName());
     private ArrayList<OrderItem> items = new ArrayList<OrderItem>();
     private double totalPrice = 0;
     private OrderStatus status = OrderStatus.OPEN;
@@ -38,19 +40,19 @@ public class Order {
                 return items;
             }
         }
-        System.out.println("Item not found in order");
+        LOGGER.info("Item not found in order");
         return items;
     }
 
     public boolean proceedToCheckout(double userBalance) throws Exception {
         // not a good design
         if (userBalance < this.totalPrice) {
-            System.out.println("Insufficient balance");
+            LOGGER.info("Insufficient balance");
             // throw new Exception("Insufficient balance");
             return false;
         }
-        if (this.items.size() == 0) {
-            System.out.println("No items selected");
+        if (this.items.isEmpty()) {
+            LOGGER.info("No items selected");
             // throw new Exception("No items selected");
             return false;
         }
