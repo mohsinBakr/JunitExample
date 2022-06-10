@@ -10,7 +10,6 @@ import static org.junit.Assert.*;
 
 public class TestOrder {
     Order order ;
-    double userBalance = 3.0;
     @Before
     public void setup(){
         order = new Order();
@@ -50,6 +49,7 @@ public class TestOrder {
     @Test
     public void testOrderProceedToCheckoutFailsWithInsufficientBalanceDoesntChangeOrderStatus() throws Exception {
         order = new Order();
+        double userBalance = 3.0;
         order.addItem(new OrderItem("Juice",12.0));
         order.proceedToCheckout(userBalance);
         assertEquals(OrderStatus.OPEN,order.getStatus());
