@@ -33,18 +33,20 @@ public class TestOrder {
         assertEquals(0,order.itemsCount());
         OrderItem item = new OrderItem("Bread",2.5);
         order.addItem(item);
-        assertEquals(2.5,order.getTotalPrice(),1e-15);
+        assertEquals(2.5,order.getTotalPrice(),0);
     }
 
     @Test
     public void testOrderRemoveItemFromOrder(){
+        OrderItem toBeRemovedItem = new OrderItem("Water",3);
         order.addItem(new OrderItem("Chips",10));
-        order.addItem(new OrderItem("Water",3));
+        order.addItem(toBeRemovedItem);
         order.addItem(new OrderItem("Nescafe",100));
-        String toBeRemovedItemName = "Water";
-        ArrayList<OrderItem> items = order.removeItem(toBeRemovedItemName);
-        assertFalse("Item "+toBeRemovedItemName+ " found in order", items.stream().anyMatch(e -> e.getName().equals(toBeRemovedItemName)));
+        double orderTotalPrice = order.getTotalPrice();
+        ArrayList<OrderItem> items = order.removeItem(toBeRemovedItem.getName());
+        assertFalse("Item "+toBeRemovedItem.getName()+ " found in order", items.stream().anyMatch(e -> e.getName().equals(toBeRemovedItem.getName())));
         assertEquals(2,items.size());
+        assertEquals(orderTotalPrice-toBeRemovedItem.getPrice(),order.getTotalPrice(),0);
     }
     @Test
     public void testOrderProceedToCheckoutFailsWithInsufficientBalanceDoesntChangeOrderStatus() throws Exception {
