@@ -54,4 +54,7 @@ public class Order {
         this.status = OrderStatus.PLACED;
         return true;
     }
+    public String toString(){
+        return this.getItems().toString();
+    }
 }

@@ -32,4 +32,8 @@ public class OrderItem {
     public void setName(String name) {
         this.name = name;
     }
+
+    public String toString(){
+        return String.format("(%s - %f)",this.getName(),this.getPrice());
+    }
 }
