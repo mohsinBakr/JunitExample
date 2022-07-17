@@ -35,7 +35,9 @@ public class Order {
 
     public ArrayList<OrderItem> removeItem(String itemName) {
         for (int i = 0; i < items.size(); i++) {
-            if (itemName.equals(items.get(i).getName())) {
+            OrderItem currentItem = items.get(i);
+            if (itemName.equals(currentItem.getName())) {
+                this.totalPrice-= currentItem.getPrice();
                 items.remove(i);
                 return items;
             }
