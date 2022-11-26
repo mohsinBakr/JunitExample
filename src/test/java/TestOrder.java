@@ -65,5 +65,6 @@ public class TestOrder {
         order.addItem(Item1);
         assertEquals(1,order.itemsCount());
         order.proceedToCheckout(10);
+        assertEquals(OrderStatus.OPEN,order.getStatus());
     }
 }
